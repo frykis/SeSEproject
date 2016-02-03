@@ -2,7 +2,7 @@
 #include <math.h>
 #include <stdio.h>
 
-#define NUM_POINTS 16
+#define NUM_POINTS 64 //Power of two.
 #define REAL 0
 #define IMAG 1
 
@@ -15,7 +15,6 @@ void generate_signal(fftw_complex* signal) {
 		signal[i][IMAG] = 0.0;		
 		printf("%g\n",signal[i][REAL]);	
 	}
-	printf("%s\n","Test" );
 }
 
 void compute_magnitude(fftw_complex* result) {
