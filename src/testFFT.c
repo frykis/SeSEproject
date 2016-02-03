@@ -2,20 +2,14 @@
 #include <math.h>
 #include <stdio.h>
 
-#define NUM_POINTS 16
+#define NUM_POINTS 4
 #define REAL 0
 #define IMAG 1
 
 void generate_signal(fftw_complex* signal) {
 	int i;
-	for (i = 0; i <NUM_POINTS; i++) {
-		double theta = (double)i / NUM_POINTS * M_PI;
-		signal[i][REAL] = 1.0 * cos(10.0 * theta) +
-					0.5 * cos(25.0 * theta);
-		signal[i][IMAG] = 0.0;		
-		printf("%g\n",signal[i][REAL]);	
-	}
-	printf("%s\n","Test" );
+	for (i = 0; i <NUM_POINTS; i++)
+		signal[i][REAL] = 1;
 }
 
 void compute_magnitude(fftw_complex* result) {
