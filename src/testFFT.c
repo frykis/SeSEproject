@@ -1,18 +1,18 @@
 #include <fftw3.h>
 #include <math.h>
 #include <stdio.h>
+#include <example.h>
 
-#define NUM_POINTS 4
 #define REAL 0
 #define IMAG 1
 
-void generate_signal(fftw_complex* signal) {
+void generate_signal(fftw_complex* signal, int NUM_POINTS) {
 	int i;
 	for (i = 0; i <NUM_POINTS; i++)
 		signal[i][REAL] = 1;
 }
 
-void compute_magnitude(fftw_complex* result) {
+void compute_magnitude(fftw_complex* result, int NUM_POINTS) {
 	int i;
 	for (i = 0; i < NUM_POINTS; i++) {
 		double mag = sqrt(result[i][REAL] * result[i][REAL] + 
@@ -21,7 +21,7 @@ void compute_magnitude(fftw_complex* result) {
 	}
 }
 
-int main() {
+double example_FFT(int NUM_POINTS) {
 	fftw_complex signal[NUM_POINTS];
 	fftw_complex result[NUM_POINTS];
 
@@ -31,11 +31,11 @@ int main() {
 									  FFTW_FORWARD,
 									  FFTW_ESTIMATE);
 
-	generate_signal(signal);
+	generate_signal(signal, NUM_POINTS);
 	fftw_execute(plan);
-	compute_magnitude(result);
+	compute_magnitude(result, NUM_POINTS);
 
 	fftw_destroy_plan(plan);
 
-	return 0;
+	return result[0][REAL];
 }
