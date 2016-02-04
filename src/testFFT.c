@@ -39,3 +39,10 @@ double example_FFT(int NUM_POINTS) {
 
 	return result[0][REAL];
 }
+
+
+double *example_FFT_signal(int NUM_POINTS, double coeff[]) {
+	int a = NUM_POINTS;
+
+	return a;
+}
