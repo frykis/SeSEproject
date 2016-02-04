@@ -18,8 +18,12 @@ def example_FFT_signal():
     """
     NUM_POINTS = 4
     coeff = [1.0]*NUM_POINTS
-    temp = lib.example_FFT_signal(NUM_POINTS, coeff)
-    print temp[1]
+    temp2 = ffi.new("double []", [1,1,1,1])
+    print temp2[0]
+    temp = ffi.new("double []", 4)
+    lib.example_FFT_signal(temp2)
+
+    print temp2[0]
 
 
 def test_example_FFT_signal():
