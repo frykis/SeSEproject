@@ -6,7 +6,7 @@
 #define REAL 0
 #define IMAG 1
 
-void generate_signal(fftw_complex* signal, int NUM_POINTS) {
+void generate_signal_ones(fftw_complex* signal, int NUM_POINTS) {
 	int i;
 	for (i = 0; i <NUM_POINTS; i++)
 		signal[i][REAL] = 1;
@@ -21,7 +21,7 @@ void compute_magnitude(fftw_complex* result, int NUM_POINTS) {
 	}
 }
 
-double example_FFT(int NUM_POINTS) {
+double example_FFT_ones(int NUM_POINTS) {
 	fftw_complex signal[NUM_POINTS];
 	fftw_complex result[NUM_POINTS];
 
@@ -31,9 +31,8 @@ double example_FFT(int NUM_POINTS) {
 									  FFTW_FORWARD,
 									  FFTW_ESTIMATE);
 
-	generate_signal(signal, NUM_POINTS);
+	generate_signal_ones(signal, NUM_POINTS);
 	fftw_execute(plan);
-	compute_magnitude(result, NUM_POINTS);
 
 	fftw_destroy_plan(plan);
 
@@ -41,6 +40,6 @@ double example_FFT(int NUM_POINTS) {
 }
 
 
-void example_FFT_signal(double coeff[]) {
+void example_FFT_manipulate_list(double coeff[]) {
 	coeff[0] = 2;
 }
