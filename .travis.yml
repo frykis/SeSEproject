@@ -15,6 +15,10 @@ install:
     fi
   - pip install pep8
 
+before_script:
+- export PYTHONPATH=$PYTHONPATH:$(pwd)/build
+
+
 script:
   #- pep8 test/test.py
   - if [[ $TRAVIS_PYTHON_VERSION == 2.6 ]];
