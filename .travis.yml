@@ -16,10 +16,10 @@ install:
   - pip install pep8
 
 script:
-  - pep8 test.py
+  - pep8 test/test.py
   - if [[ $TRAVIS_PYTHON_VERSION == 2.6 ]];
-    then py.test -vv test.py --cov test.py;
-    else py.test -vv test.py;
+    then py.test -vv test/test.py --cov test/test.py;
+    else py.test -vv test/test.py;
     fi
 
 after_success:
