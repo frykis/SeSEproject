@@ -10,7 +10,7 @@ python:
 
 iinstall:
   - pip install -r requirements.txt
-  - brew install fftw
+  - brew install fftw3
 
 before_script:
   - cd ${TRAVIS_BUILD_DIR}
@@ -25,3 +25,6 @@ script:
   - export PYTHONPATH=$PYTHONPATH:$(pwd)/build
   #- pep8 test/test.py
   - py.test -vv test/test.py
+
+  notifications:
+  email: false
