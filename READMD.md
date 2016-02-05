@@ -28,11 +28,11 @@ py.test -vv test/test.py
 |-- LICENSE
 |-- README.md
 |-- api
-|   |-- example.h      # C interface to the C++ code
+|   |-- example.h      # C interface to the C code
 |   `-- example.py     # CFFI layer
 |-- requirements.txt   # required Python modules
 |-- src
-|   `-- example.cpp    # C++ code
+|   `-- example.c    # Ccode
 `-- test
-    `-- test.py        # Python code calling C++ functions
+    `-- test.py        # Python code calling C functions
 ```
