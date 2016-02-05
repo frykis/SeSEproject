@@ -82,7 +82,7 @@ def test_example_FFT_manipulate_list():
 	lib.example_FFT_manipulate_list(temp)
 	newList = c2pyList(temp,NUM_POINTS)
 	coeff[0] = 2
-	print newList == coeff
+	assert newList == coeff
 
 
 
