@@ -10,7 +10,7 @@ python:
 
 install:
   - pip install -r requirements.txt
-  - brew install fftw3
+  - pip install pyfftw3
 
 before_script:
   - cd ${TRAVIS_BUILD_DIR}
