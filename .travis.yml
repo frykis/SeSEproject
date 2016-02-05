@@ -8,28 +8,19 @@ python:
   - 3.3
   - 3.4
 
-install:
-  - if [[ $TRAVIS_PYTHON_VERSION == 2.6 ]];
-    then pip install pytest-cov python-coveralls;
-    else pip install pytest;
-    fi
-  - pip install pep8
+iinstall:
+  - pip install -r requirements.txt
 
 before_script:
-- export PYTHONPATH=$PYTHONPATH:$(pwd)/build
-
+  - cd ${TRAVIS_BUILD_DIR}
+  - export CC=${C_COMPILER}
 
 script:
+  - mkdir build
+  - cd build
+  - cmake ..
+  - make
+  - cd ..
+  - export PYTHONPATH=$PYTHONPATH:$(pwd)/build
   #- pep8 test/test.py
-  - if [[ $TRAVIS_PYTHON_VERSION == 2.6 ]];
-    then py.test -vv test/test.py --cov test/test.py;
-    else py.test -vv test/test.py;
-    fi
-
-after_success:
-  - if [[ $TRAVIS_PYTHON_VERSION == 2.6 ]];
-    then coveralls;
-    fi
-
-notifications:
-  email: false
+  - py.test -vv test/test.py

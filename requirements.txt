@@ -1,4 +1,4 @@
 pytest
 cffi
 pep8
-FFTW
+fftw
