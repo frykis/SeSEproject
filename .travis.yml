@@ -11,8 +11,11 @@ python:
 before_install:
   - sudo add-apt-repository https://github.com/FFTW/fftw3.git
   - git status
-  - sudo apt-get install ocaml
-  - sudo apt-get install ocamlbuild
+  - sudo add-apt-repository --yes ppa:avsm/ppa
+  - sudo apt-get update -qq
+  - sudo apt-get install -y opam
+  - sudo eval $(opam config env)
+
   - sudo apt-get install autoconf
   - sudo apt-get install automake
   - sudo apt-get install indent
