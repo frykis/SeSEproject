@@ -10,7 +10,8 @@ python:
 
 before_install:
   - sudo add-apt-repository https://github.com/FFTW/fftw3.git
-  - sudo apt-get install fftw3 -y
+  - sh bootstrap.sh
+  - make
 
 install:
   - pip install -r requirements.txt
