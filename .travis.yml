@@ -8,9 +8,19 @@ python:
   - 3.3
   - 3.4
 
+addons:
+  apt:
+    sources:
+    - avsm
+    packages:
+    - ocaml
+    - ocaml-native-compilers
+    - opam
+    - libfftw3-dev
+    - liblapack-dev  
+
 install:
   - pip install -r requirements.txt
-  - brew install fftw3
 
 before_script:
   - cd ${TRAVIS_BUILD_DIR}
