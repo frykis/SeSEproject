@@ -11,7 +11,12 @@ python:
 before_install:
   - sudo add-apt-repository https://github.com/FFTW/fftw3.git
   - git status
-  - sudo apt-get install libfftw3
+  - sudo apt-get install ocaml
+  - sudo apt-get install ocamlbuild
+  - sudo apt-get install autoconf
+  - sudo apt-get install automake
+  - sudo apt-get install indent
+  - sudo apt-get install libtool
 
   - sh bootstrap.sh
   - make
