@@ -8,14 +8,13 @@ python:
   - 3.3
   - 3.4
 
-
-install:
-  - ./travis-tool.sh aptget_install fftw3-dev
-
+before_install:
+  - sudo add-apt-repository https://github.com/FFTW/fftw3.git
+  - sudo apt-get install fftw3 -y
 
 install:
   - pip install -r requirements.txt
-  
+
 
 before_script:
   - cd ${TRAVIS_BUILD_DIR}
