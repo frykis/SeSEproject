@@ -9,24 +9,23 @@ python:
   - 3.4
 
 before_install:
-  - sudo add-apt-repository https://github.com/FFTW/fftw3.git
-  - git status
-  - sudo add-apt-repository --yes ppa:avsm/ppa
-  - sudo apt-get update -qq
-  - sudo apt-get install -y opam
-  - sudo eval $(opam config env)
+  - sudo apt-get install fftw3
+  #- sudo add-apt-repository https://github.com/FFTW/fftw3.git
+  #- sudo add-apt-repository --yes ppa:avsm/ppa
+  #- sudo apt-get update -qq
+  #- sudo apt-get install -y opam
+  #- sudo eval $(opam config env)
 
-  - sudo apt-get install autoconf
-  - sudo apt-get install automake
-  - sudo apt-get install indent
-  - sudo apt-get install libtool
+  #- sudo apt-get install autoconf
+  #- sudo apt-get install automake
+  #- sudo apt-get install indent
+  #- sudo apt-get install libtool
 
-  - sh bootstrap.sh
-  - make
+  #- sh bootstrap.sh
+  #- make
 
 install:
   - pip install -r requirements.txt
-
 
 before_script:
   - cd ${TRAVIS_BUILD_DIR}
