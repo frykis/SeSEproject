@@ -15,8 +15,7 @@ cd build
 cmake ..
 make
 cd ..
-export PYTHONPATH=$PYTHONPATH:$(pwd)/build
-py.test -vv test/test.py
+PYTHONPATH=$PYTHONPATH:$(pwd)/build py.test -vv test/test.py
 ```
 
 
