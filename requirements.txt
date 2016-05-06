@@ -1,3 +1,4 @@
 pytest
 cffi
 pep8
+numpy
