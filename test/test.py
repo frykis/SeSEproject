@@ -33,34 +33,7 @@ def cast_matrix(matrix, ffi):
                 ptr_ptr[i] = ptr + i*matrix.shape[1]
         return ptr_ptr
 
-# radovan: this throws errors, took it out for the moment
-def test_sum_example():
-        """
-        Test: Create a C-function in Python via FFI. Pass argument to function and validate result with Numpy.
-        """
 
-        ffi.cdef("""
-                double sum(double**, int, int);
-                """)
-        C = ffi.verify("""
-                double sum(double** matrix,int x, int y){
-                int i, j;
-                double sum = 0.0;
-                for (i=0; i<x; i++){
-                        for (j=0; j<y; j++){
-                                sum = sum + matrix[i][j];
-                        }
-                }
-        return(sum);
-        }
-        """)
-        m = np.ones(shape=(10,10))
-
-        m_p = cast_matrix(m, ffi)
-
-        sm = C.sum(m_p, m.shape[0], m.shape[1])
-
-        assert m.sum() == sm
 
 
 
@@ -117,3 +90,34 @@ def test_example_FFT_signal():
                 mag[i] = np.sqrt(newMatrix[i][0]*newMatrix[i][0] +
                                              newMatrix[i][1]*newMatrix[i][1])
         assert mag == [4.0,0.0,0.0,0.0]
+
+
+
+# radovan: this throws errors, took it out for the moment
+def test_sum_example():
+        """
+        Test: Create a C-function in Python via FFI. Pass argument to function and validate result with Numpy.
+        """
+
+        ffi.cdef("""
+                double sum(double**, int, int);
+                """)
+        C = ffi.verify("""
+                double sum(double** matrix,int x, int y){
+                int i, j;
+                double sum = 0.0;
+                for (i=0; i<x; i++){
+                        for (j=0; j<y; j++){
+                                sum = sum + matrix[i][j];
+                        }
+                }
+        return(sum);
+        }
+        """)
+        m = np.ones(shape=(10,10))
+
+        m_p = cast_matrix(m, ffi)
+
+        sm = C.sum(m_p, m.shape[0], m.shape[1])
+
+        assert m.sum() == sm        
