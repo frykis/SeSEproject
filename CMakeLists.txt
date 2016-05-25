@@ -4,19 +4,17 @@ project(pythonFFT)
 
 enable_language(C)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake)
 
-set(CMAKE_C_FLAGS "-lfftw3")
-
-file(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/include)
-file(COPY ${PROJECT_SOURCE_DIR}/api/example.h  DESTINATION ${PROJECT_BINARY_DIR}/include)
-file(COPY ${PROJECT_SOURCE_DIR}/api/example.py DESTINATION ${PROJECT_BINARY_DIR})
+find_package(FFTW REQUIRED)
 
 include_directories(${PROJECT_SOURCE_DIR}/api)
+include_directories(${FFTW_INCLUDES})
 
 add_library(
     example
     SHARED
     src/testFFT.c
     )
+
+target_link_libraries(example ${FFTW_LIBRARIES})

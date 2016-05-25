@@ -1,30 +1,41 @@
-"""
-Python handle to example library.
-"""
+def get_env(v):
+    import sys
+    import os
+    _v = os.getenv(v)
+    if _v is None:
+        sys.stderr.write('Error: Environment variable {0} is undefined\n'.format(v))
+        sys.exit(1)
+    return _v
 
-import os
-import sys
-import subprocess
-from cffi import FFI
 
-BUILD_DIR = os.path.abspath(os.path.dirname(__file__))
+def get_library_suffix():
+    import sys
+    if sys.platform == "darwin":
+        return 'dylib'
+    else:
+        return 'so'
 
-ffi = FFI()
 
-ffi.cdef(
-    subprocess.Popen(
-        [
-            'cc',
-            '-E',
-            '-DEXAMPLE_API=',
-            '-DEXAMPLE_NOINCLUDE',
-            os.path.join(BUILD_DIR, 'include', 'example.h')
-        ],
-        stdout=subprocess.PIPE).communicate()[0])
+def get_lib_handle(definitions, header, library, build_dir, include_dir):
+    import os
+    from subprocess import Popen, PIPE
+    from cffi import FFI
+    ffi = FFI()
 
-if sys.platform == "darwin":
-    suffix = 'dylib'
-else:
-    suffix = 'so'
+    interface = Popen(['cc', '-E'] + definitions + [os.path.join(include_dir, header)],
+                      stdout=PIPE).communicate()[0].decode("utf-8")
+    ffi.cdef(interface)
 
-lib = ffi.dlopen(os.path.join(BUILD_DIR, 'lib', 'libexample.%s' % suffix))
+    suffix = get_library_suffix()
+    lib = ffi.dlopen(os.path.join(build_dir, 'lib{0}.{1}'.format(library, suffix)))
+    return ffi, lib
+
+
+build_dir = get_env('PROJECT_BUILD_DIR')
+include_dir = get_env('PROJECT_INCLUDE_DIR')
+
+ffi, lib = get_lib_handle(['-DEXAMPLE_API=', '-DEXAMPLE_NOINCLUDE'],
+                          'example.h',
+                          'example',
+                          build_dir,
+                          include_dir)
