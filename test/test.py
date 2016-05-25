@@ -34,7 +34,7 @@ def cast_matrix(matrix, ffi):
         return ptr_ptr
 
 # radovan: this throws errors, took it out for the moment
-def deactivated_test_sum_example():
+def test_sum_example():
         """
         Test: Create a C-function in Python via FFI. Pass argument to function and validate result with Numpy.
         """
